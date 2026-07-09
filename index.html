@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:">
+  <title>Color Post-Process Calibrator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="title-row">
+        <h1>Color Post-Process Calibrator</h1>
+        <button id="open-asset-button" class="primary-button" type="button">PostProcessingProfile（.asset）を読み込む</button>
+      </div>
+      <div id="profile-summary" class="profile-summary"></div>
+      <div id="warning-banner" class="warning-banner hidden"></div>
+      <div id="info-banner" class="info-banner hidden"></div>
+    </header>
+
+    <main class="table-wrap">
+      <table class="color-table">
+        <thead>
+          <tr>
+            <th class="index-col">#</th>
+            <th>目標値</th>
+            <th>入力値</th>
+            <th>出力値</th>
+            <th>修正値</th>
+            <th class="action-col">操作</th>
+          </tr>
+        </thead>
+        <tbody id="rows-body"></tbody>
+      </table>
+    </main>
+  </div>
+
+  <div id="eyedropper-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="eyedropper-title">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 id="eyedropper-title">スポイト</h2>
+        <button id="eyedropper-close" class="icon-button" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div class="modal-toolbar">
+        <select id="display-select" aria-label="ディスプレイ"></select>
+        <button id="recapture-button" type="button">再キャプチャ</button>
+        <span class="modal-note">キャプチャは静止画です。Unity の画面を前面にしてからスポイトを開いてください</span>
+      </div>
+      <div id="capture-error" class="capture-error hidden"></div>
+      <div class="capture-layout">
+        <canvas id="capture-canvas"></canvas>
+        <div class="loupe-panel">
+          <canvas id="loupe-canvas" width="176" height="176"></canvas>
+          <div id="loupe-hex" class="loupe-hex">#------</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="colormath.js"></script>
+  <script src="asset-parser.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "name": "color-post-process-calibrator",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64",
+    "make-zip": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Compress-Archive -Path dist/win-unpacked/* -DestinationPath dist/color-post-process-calibrator-win-x64.zip -Force\""
+  },
+  "devDependencies": {
+    "electron": "^42.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.ricasso.color-post-process-calibrator",
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "files": [
+      "index.html",
+      "style.css",
+      "app.js",
+      "colormath.js",
+      "asset-parser.js",
+      "main.js",
+      "preload.js"
+    ]
+  }
+}
